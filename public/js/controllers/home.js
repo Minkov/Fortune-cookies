@@ -61,16 +61,14 @@ var controllers = controllers || {};
         return templates.get('cookies');
       })
       .then(function(template) {
-        var data = {
+        context.$element().html(template({
           cookies: cookies,
           pages: Array.apply(null, {
             length: pagesCount
           }).map(Number.call, Number).map(function(page) {
             return page + 1;
           })
-        };
-        console.log(data.pages);
-        context.$element().html(template(data));
+        }));
 
         $('.btn-like-dislike').on('click', function() {
           if (!data.users.hasUser()) {
