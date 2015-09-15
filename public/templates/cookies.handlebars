@@ -8,7 +8,16 @@
   <input data-type="text" type="text" class="tb-filter" class="form-control" />
 </div>
 <div class="cookies-list row container">
-  {{#each this}}
+  <div>
+    <ul class="pager">
+      {{#each pages}}
+        <li>
+          <a href="#/home?page={{this}}">{{this}}</a>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+  {{#each cookies}}
     <div class="cookie-box container col-offset-1 col-xs-5 row" data-id="{{id}}">
       <h3 class="col-md-12 row">
         <span class="text col-md-6">{{text}}
@@ -50,4 +59,15 @@
       </div>
     </div>
   {{/each}}
+
+  <div style="clear:both"></div>
+  <div>
+    <ul class="pager">
+      {{#each pages}}
+        <li>
+          <a href="#/home?page={{this}}">{{this}}</a>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
 </div>

@@ -4,11 +4,15 @@ var controllers = controllers || {};
   function all(context) {
     var sortby = context.params.sortby || 'date',
       category = context.params.category || null,
-      user = context.params.user || null;
+      user = context.params.user || null,
+      page = context.params.page || 1;
 
     var cookies,
       users,
-      promise;
+      promise,
+      pageSize = 10,
+      pagesCount;
+
     if (data.users.hasUser()) {
       promise = data.users.get()
         .then(function(resUsers) {
@@ -32,6 +36,11 @@ var controllers = controllers || {};
           }
           return c2.likes - c1.likes;
         });
+
+        pagesCount = Math.floor(cookies.length / pageSize + 1);
+
+        cookies = cookies.slice((page - 1) * pageSize, page * pageSize);
+
         cookies = cookies.map(function(cookie) {
           cookie.timePast = moment(cookie.shareDate).fromNow();
           cookie.shareDate = moment(cookie.shareDate).format('Do MMM YYYY, hh:mm');
@@ -52,7 +61,16 @@ var controllers = controllers || {};
         return templates.get('cookies');
       })
       .then(function(template) {
-        context.$element().html(template(cookies));
+        var data = {
+          cookies: cookies,
+          pages: Array.apply(null, {
+            length: pagesCount
+          }).map(Number.call, Number).map(function(page) {
+            return page + 1;
+          })
+        };
+        console.log(data.pages);
+        context.$element().html(template(data));
 
         $('.btn-like-dislike').on('click', function() {
           if (!data.users.hasUser()) {
