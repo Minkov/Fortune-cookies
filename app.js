@@ -1,12 +1,14 @@
 var express = require('express'),
   bodyParser = require('body-parser'),
-  lowdb = require('lowdb');
+  lowdb = require('lowdb'),
+  cors = require('cors');
 
 var db = lowdb('./data/data.json');
 db._.mixin(require('underscore-db'));
 
 var app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 app.use(express.static('public'));
 
