@@ -7,7 +7,7 @@
 	<meta property="og:type"          content="website" />
 	<meta property="og:title"         content="Testing Title" />
 	<meta property="og:description"   content="Test description" />
-	<meta property="og:image"      id="ogImage"   content="http://fortune-cookies-demo.herokuapp.com/test.png" />
+	<meta property="og:image"         content="http://fortune-cookies-demo.herokuapp.com/test.png" />
 </head>
 <body>
 	<!-- Load Facebook SDK for JavaScript -->
@@ -32,11 +32,5 @@
         Yup
 	</div>
 	<img width="300" id="preview">
-	<script>
-		var ogImage= document.getElementById('ogImage');
-		var image = document.getElementById('preview');
-		var content = ogImage.getAttribute('content'); 
-		image.src = content;
-	</script>
 </body>
 </html>
